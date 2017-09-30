@@ -9,6 +9,8 @@ class App extends Component {
           <h1 className="App-title">Welcome!</h1>
         </header>
         <p>This is a poc from the default create react app we all love and adore...lets start to do more stuff!</p>
+        <p>this is a big change for QA!</p>
+        <p>Testing some npm scripts.</p>
       </div>
     );
   }

@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "fir-poc-941b5"
+    "default": "fir-poc-941b5",
+    "qa": "fir-poc-qa"
   }
 }
