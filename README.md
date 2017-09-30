@@ -8,8 +8,8 @@
 
 # Environments:
 
-Live: https://fir-poc-941b5.firebaseapp.com/ (gotta love this awesome url!)
-QA: https://fir-poc-qa.firebaseapp.com/
+- Live: https://fir-poc-941b5.firebaseapp.com/ (gotta love this awesome url!)
+- QA: https://fir-poc-qa.firebaseapp.com/
 
 # Notes:
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
