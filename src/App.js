@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './App.css'
 import GoogleSignIn from './components/GoogleSignIn'
+import Messages from './components/Messages'
 
 class App extends Component {
 
@@ -23,6 +24,8 @@ class App extends Component {
   render() {
     const picture = (this.state.loggedInUser.picture) ? <img width='50px' src={this.state.loggedInUser.picture}></img> : ''
     const signInButtons = (this.state.loggedInUser.name !== 'anonymous') ? '' : <GoogleSignIn loginCallback={this.handleLogin} />
+    const messages = (this.state.loggedInUser.name === 'anonymous') ? '' : <Messages />
+      // normally we would not write it with a hack like this, but we can and this is just a poc
     return (
       <div className="App">
         <header className="App-header">
@@ -33,7 +36,7 @@ class App extends Component {
         <p>this is a big change for QA!</p>
         <p>Testing some npm scripts.</p>
         {signInButtons}
-
+        {messages}
       </div>
     )
   }
