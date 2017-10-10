@@ -17,35 +17,19 @@ class PrivateMessages extends Component {
 
   componentDidMount() {
 
-    // firebase.database().ref('pmessages').on('value', pmessages => {
-    //   console.log('PrivateMessages.componentDidMount.on pmessages ->', pmessages)
-    //   console.log('PrivateMessages.componentDidMount.on pmessages.key ->', pmessages.key)
-    //   console.log('PrivateMessages.componentDidMount.on pmessages.val ->', pmessages.val())
-    //   const pmessagesForState = pmessages.val().forEach(pmessage => console.log('PrivateMessages.componentDidMount.on.val().map pmessage.key ->', pmessage.key))
-    //   //const stateMessages = [];
-    //   //pmessages.forEach(message => stateMessages.push({key: message.key, text: message.val().text}))
-    //   //this.setState({messages: stateMessages})
-    //
-    //   // console.log('PrivateMessages.componentDidMount() child_added ->', data)
-    //   // const messages = this.state.messages
-    //   // console.log('PrivateMessages.componentDidMount.messages ->', this.state.messages.length)
-    //   // messages.push({key: pmessage.key, text: pmessage.val()})
-    //   // this.setState({ messages })
-    // })
+    firebase.database().ref('pmessages').limitToLast(3).on('value', pmessages => {
+      console.log('PrivateMessages.componentDidMount.on pmessages ->', pmessages)
+      console.log('PrivateMessages.componentDidMount.on pmessages.key ->', pmessages.key)
+      console.log('PrivateMessages.componentDidMount.on pmessages.val ->', pmessages.val())
+      const initializedState = [];
+      for (var pmessageKey in pmessages.val()) {
+        initializedState.push(Object.assign({}, {key: pmessageKey}, pmessages.val()[pmessageKey]))
+      }
+      this.setState({messages: initializedState})
 
-    firebase.database().ref('pmessages').on('child_added', data => {
-      console.log('PrivateMessages.componentDidMount.on.child_added data ->', data);
-      console.log('PrivateMessages.componentDidMount.on.child_added data.key ->', data.key);
-      console.log('PrivateMessages.componentDidMount.on.child_added data.val ->', data.val());
-
-      // console.log('PrivateMessages.componentDidMount() child_added ->', data)
-      const messages = this.state.messages
-      console.log('PrivateMessages.componentDidMount.on.child.child_added messages ->', this.state.messages.length)
-      messages.push(Object.assign({}, {key: data.key}, data.val()))
-      this.setState({ messages })
     })
-    // this seems like a massive hack...the component is rerendering for each child_added on initial fetch
-    // i must be reading the firebase documentation wroong or keying into the wrong events
+
+    // this still seems like a hack...state is re-rendered with all messages with every new message
   }
 
   render() {
